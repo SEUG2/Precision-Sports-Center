@@ -21,6 +21,7 @@ Developed as part of the **DCIT 208 Course Project (University of Ghana)**, the 
 - **Malik Fattah** – Frontend Developer  
 - **Oduro Stephen** – Backend Developer  
 - **Clement Ocran** – Backend Developer  
+- **Dawda Haruna** – Full-Stack Developer 
 - **Asiatey Michael** – Database Administrator  
 
 ---
