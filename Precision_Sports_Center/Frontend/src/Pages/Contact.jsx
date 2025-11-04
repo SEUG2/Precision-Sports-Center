@@ -44,9 +44,9 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Address</h3>
                       <p className="text-muted-foreground">
-                        123 Sports Avenue<br />
-                        Athletic District<br />
-                        Sports City, SC 12345
+                        Ghana<br />
+                        Greater Accra-Anyaa Awoshie<br />
+                        AN 44 Deeper Life Street, GC000-000.
                       </p>
                     </div>
                   </div>
@@ -58,8 +58,8 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
                       <p className="text-muted-foreground">
-                        +1 (555) 123-4567<br />
-                        +1 (555) 123-4568
+                        +233 50 399 8502 <br />
+                        +233 50 399 8502
                       </p>
                     </div>
                   </div>

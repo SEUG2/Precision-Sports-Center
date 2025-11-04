@@ -32,4 +32,12 @@ const CardContent = React.forwardRef(({ className, ...props }, ref) => (
 ));
 CardContent.displayName = "CardContent";
 
+export const CardFooter = ({ children, className = "", ...props }) => {
+  return (
+    <div className={`card-footer ${className}`} {...props}>
+      {children}
+    </div>
+  );
+};
+
 export { Card, CardHeader, CardTitle, CardContent };

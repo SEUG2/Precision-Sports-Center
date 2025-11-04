@@ -1,60 +1,61 @@
 // src/components/Register.jsx
-import React, { useState } from 'react';
-import './Register.css';
+import React, { useState } from "react";
+import "./Register.css";
 
 const Register = () => {
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePassword = () => setShowPassword(!showPassword);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((s) => ({ ...s, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: replace with real submit logic (API)
+    alert(`Register (demo)\n\nName: ${form.name}\nEmail: ${form.email}`);
+    setForm({ name: "", email: "", password: "" });
+  };
 
   return (
-    <div className="register-container">
-      <form className="register-form">
-        <input type="text" placeholder="First name" required />
-        <input type="text" placeholder="Last name" required />
-        <input type="email" placeholder="Email address" required />
+    <div className="register-page">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h2>Create account</h2>
 
-        <div className="password-field">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Create a password"
-            required
-          />
-          <button
-            type="button"
-            className="show-btn"
-            onClick={togglePassword}
-          >
-            {showPassword ? 'Hide' : 'Show'}
-          </button>
-        </div>
+        <label>
+          Name
+          <input name="name" value={form.name} onChange={handleChange} required />
+        </label>
 
-        <div className="checkbox-group">
-          <label>
-            <input type="checkbox" defaultChecked />
-            Keep me signed in
-          </label>
-          <p className="note">
-            Uncheck if using a public device. <a href="#">Show</a>
-          </p>
-        </div>
+        <label>
+          Email
+          <input name="email" type="email" value={form.email} onChange={handleChange} required />
+        </label>
 
-        <div className="checkbox-group">
-          <label>
-            <input type="checkbox" defaultChecked />
-            Send me emails about new arrivals, hot items, daily savings, & more.
-          </label>
-        </div>
+        <label className="password-row">
+          Password
+          <div className="password-field">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={form.password}
+              onChange={handleChange}
+              required
+              minLength={6}
+            />
+            <button
+              type="button"
+              className="toggle-pw"
+              onClick={() => setShowPassword((s) => !s)}
+              aria-label="Toggle password visibility"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+        </label>
 
-        <p className="terms">
-          By clicking Create Account, you acknowledge you have read and agreed to our
-          <a href="#"> Terms of Use</a> and <a href="#"> Privacy Policy</a>.
-        </p>
-
-        <button type="submit" className="create-btn">Create Account</button>
-
-        <p className="signin-prompt">Already have an account?</p>
-        <button type="button" className="signin-btn">Sign In</button>
+        <button type="submit" className="btn-submit">Register</button>
       </form>
     </div>
   );

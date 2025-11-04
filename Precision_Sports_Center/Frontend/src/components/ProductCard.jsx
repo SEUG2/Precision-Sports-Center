@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Star, ShoppingCart } from 'lucide-react';
+import React from "react";
+import { formatGHS } from "../lib/formatCurrency";
 
 const ProductCard = ({ product }) => {
   const {
@@ -86,11 +88,11 @@ const ProductCard = ({ product }) => {
         {/* Price */}
         <div className="flex items-center gap-2 mb-3">
           <span className="text-lg font-bold text-foreground">
-            ${price}
+            {formatGHS(price)}
           </span>
           {originalPrice && originalPrice > price && (
             <span className="text-sm text-muted-foreground line-through">
-              ${originalPrice}
+              {formatGHS(originalPrice)}
             </span>
           )}
         </div>
