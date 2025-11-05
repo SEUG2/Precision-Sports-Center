@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import logo from "../img/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faSearch, faShoppingCart, faUser, faStore, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faEnvelope,
+  faSearch,
+  faShoppingCart,
+  faUser,
+  faStore,
+  faSignInAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -30,9 +38,19 @@ export default function Home() {
   ];
 
   const featured = [
-    { id: 1, title: "Pro Football Boots", price: 450, img: "/img/product-1.jpg" },
+    {
+      id: 1,
+      title: "Pro Football Boots",
+      price: 450,
+      img: "/img/product-1.jpg",
+    },
     { id: 2, title: "Training Jersey", price: 120, img: "/img/product-2.jpg" },
-    { id: 3, title: "Goalkeeper Gloves", price: 200, img: "/img/product-3.jpg" },
+    {
+      id: 3,
+      title: "Goalkeeper Gloves",
+      price: 200,
+      img: "/img/product-3.jpg",
+    },
   ];
 
   return (
@@ -51,30 +69,50 @@ export default function Home() {
                 }}
                 aria-expanded={shopOpen}
               >
-                <FontAwesomeIcon icon={faStore} /> <span className="btn-label">Shop</span>
+                <FontAwesomeIcon icon={faStore} />{" "}
+                <span className="btn-label">Shop</span>
                 <FontAwesomeIcon icon={faChevronDown} className="chev" />
               </button>
 
-              <div className={`shop-mega ${shopOpen ? "open" : ""}`} role="menu" aria-hidden={!shopOpen}>
+              <div
+                className={`shop-mega ${shopOpen ? "open" : ""}`}
+                role="menu"
+                aria-hidden={!shopOpen}
+              >
                 <div className="mega-accordion">
                   {categories.map((c) => (
                     <div className="mega-accordion-item" key={c.title}>
                       <button
-                        className={`mega-accordion-btn ${openCategory === c.title ? "active" : ""}`}
+                        className={`mega-accordion-btn ${
+                          openCategory === c.title ? "active" : ""
+                        }`}
                         onClick={(e) => {
                           e.stopPropagation();
-                          setOpenCategory((prev) => (prev === c.title ? null : c.title));
+                          setOpenCategory((prev) =>
+                            prev === c.title ? null : c.title
+                          );
                         }}
                         aria-expanded={openCategory === c.title}
                       >
                         <span className="mega-title">{c.title}</span>
-                        <FontAwesomeIcon icon={faChevronDown} className="chev small" />
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="chev small"
+                        />
                       </button>
 
-                      <ul className={`mega-sublist ${openCategory === c.title ? "open" : ""}`}>
+                      <ul
+                        className={`mega-sublist ${
+                          openCategory === c.title ? "open" : ""
+                        }`}
+                      >
                         {c.items.map((it) => (
                           <li key={it}>
-                            <Link to={`/shop/${c.title.toLowerCase()}`} className="mega-link" onClick={() => setShopOpen(false)}>
+                            <Link
+                              to={`/shop/${c.title.toLowerCase()}`}
+                              className="mega-link"
+                              onClick={() => setShopOpen(false)}
+                            >
                               {it}
                             </Link>
                           </li>
@@ -87,7 +125,11 @@ export default function Home() {
             </div>
 
             <Link to="/" className="site-brand" aria-label="Home">
-              <img src={logo} className="brand-logo" alt="Precision Sports Center" />
+              <img
+                src={logo}
+                className="brand-logo"
+                alt="Precision Sports Center"
+              />
             </Link>
           </div>
 
@@ -139,17 +181,25 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="hero" style={{ backgroundImage: "url('/img/hero.jpg')" }}>
+        <section
+          className="hero"
+          style={{ backgroundImage: "url('/img/hero.jpg')" }}
+        >
           <div className="hero-overlay" />
           <div className="hero-inner">
             <div className="hero-copy">
               <h1>Everything your team needs</h1>
               <p className="lead">
-                Quality kits, boots and training equipment. Fast local delivery and team discounts.
+                Quality kits, boots and training equipment. Fast local delivery
+                and team discounts.
               </p>
               <div className="hero-ctas">
-                <Link to="/shop" className="btn btn-primary">Shop All</Link>
-                <Link to="/shop/football" className="btn btn-ghost">Football</Link>
+                <Link to="/shop" className="btn btn-primary">
+                  Shop All
+                </Link>
+                <Link to="/shop/football" className="btn btn-ghost">
+                  Football
+                </Link>
               </div>
             </div>
 
@@ -177,7 +227,11 @@ export default function Home() {
             <h2 className="section-title">Shop by category</h2>
             <div className="categories-grid">
               {categories.map((c) => (
-                <Link className="cat-card" key={c.title} to={`/shop/${c.title.toLowerCase()}`}>
+                <Link
+                  className="cat-card"
+                  key={c.title}
+                  to={`/shop/${c.title.toLowerCase()}`}
+                >
                   <div className="cat-media">{c.title[0]}</div>
                   <div className="cat-title">{c.title}</div>
                   <div className="cat-sub">Browse {c.items.length} items</div>
@@ -197,7 +251,9 @@ export default function Home() {
                     <img src={p.img} alt={p.title} />
                   </Link>
                   <div className="product-body">
-                    <Link to={`/product/${p.id}`} className="product-title">{p.title}</Link>
+                    <Link to={`/product/${p.id}`} className="product-title">
+                      {p.title}
+                    </Link>
                     <div className="product-meta">
                       <span className="price">GHS {p.price}</span>
                       <button className="btn btn-sm">Add</button>
@@ -222,22 +278,41 @@ export default function Home() {
               <a href="mailto:xorlaliadogoh@gmail.com" aria-label="Email">
                 <FontAwesomeIcon icon={faEnvelope} />
               </a>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Gmail">
-                <FontAwesomeIcon icon={faGoogle} />
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Gmail"
+              >
+                <FontAwesomeIcon icon="fa-brands fa-google" />{" "}
               </a>
-              <a href="https://www.instagram.com/precisionsports_gh" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <FontAwesomeIcon icon={faInstagram} />
+              <a
+                href="https://www.instagram.com/precisionsports_gh"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <FontAwesomeIcon icon="fa-brands fa-instagram" />
               </a>
-              <a href="https://www.tiktok.com/@precisionsports_gh" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <FontAwesomeIcon icon={faTiktok} />
+              <a
+                href="https://www.tiktok.com/@precisionsports_gh"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+              >
+                <FontAwesomeIcon icon="fa-brands fa-tiktok" />
               </a>
             </div>
             <small>© 2025 Precision Sports Center</small>
           </div>
 
           <div className="footer-right">
-            <Link to="/contact" className="footer-link">Contact</Link>
-            <Link to="/about" className="footer-link">About</Link>
+            <Link to="/contact" className="footer-link">
+              Contact
+            </Link>
+            <Link to="/about" className="footer-link">
+              About
+            </Link>
           </div>
         </div>
       </footer>
