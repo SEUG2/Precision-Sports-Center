@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Contact = () => {
   const handleSubmit = (e) => {
@@ -46,7 +47,7 @@ const Contact = () => {
                       <p className="text-muted-foreground">
                         Ghana<br />
                         Greater Accra-Anyaa Awoshie<br />
-                        AN 44 Deeper Life Street, GC000-000.
+                        AN 44 Deeper Life Street, .
                       </p>
                     </div>
                   </div>
@@ -58,8 +59,10 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
                       <p className="text-muted-foreground">
+                        <a href ="tel:+233503998502" target="blank" rel='noopener noreferrer' aria-label="Call Precision Sports Center">
+                          <FontAwesomeIcon icon ={['fas', 'phone']} className="mr-2" /> 
                         +233 50 399 8502 <br />
-                        +233 50 399 8502
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -71,8 +74,10 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
                       <p className="text-muted-foreground">
-                        info@precisionsports.com<br />
-                        support@precisionsports.com
+                        <a href="mailto:xorlaliaddogoh@gmail.com" target="blank" rel="noopener noreferrer" aria-label="Email Precision Sports Center">
+                          <FontAwesomeIcon icon ={['fas', 'envelope']} className="mr-2" />
+                          xorlaliaddogoh@gmail.com
+                        </a>
                       </p>
                     </div>
                   </div>

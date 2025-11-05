@@ -1,37 +1,41 @@
 import React from "react";
 
-const Card = React.forwardRef(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className || ''}`}
-    {...props}
-  />
-));
-Card.displayName = "Card";
+// Basic Card primitives used across the app.
+// Adjust class names to match your CSS utility styles if needed.
 
-const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={`flex flex-col space-y-1.5 p-6 ${className || ''}`}
-    {...props}
-  />
-));
-CardHeader.displayName = "CardHeader";
+export const Card = ({ children, className = "", ...props }) => {
+  return (
+    <div className={`card ${className}`} {...props}>
+      {children}
+    </div>
+  );
+};
 
-const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={`text-2xl font-semibold leading-none tracking-tight ${className || ''}`}
-    {...props}
-  />
-));
-CardTitle.displayName = "CardTitle";
+export const CardHeader = ({ children, className = "", ...props }) => {
+  return (
+    <div className={`card-header ${className}`} {...props}>
+      {children}
+    </div>
+  );
+};
 
-const CardContent = React.forwardRef(({ className, ...props }, ref) => (
-  <div ref={ref} className={`p-6 pt-0 ${className || ''}`} {...props} />
-));
-CardContent.displayName = "CardContent";
+export const CardTitle = ({ children, className = "", ...props }) => {
+  return (
+    <h3 className={`card-title ${className}`} {...props}>
+      {children}
+    </h3>
+  );
+};
 
+export const CardContent = ({ children, className = "", ...props }) => {
+  return (
+    <div className={`card-content ${className}`} {...props}>
+      {children}
+    </div>
+  );
+};
+
+// Added CardFooter export to satisfy imports like ProductCard.jsx
 export const CardFooter = ({ children, className = "", ...props }) => {
   return (
     <div className={`card-footer ${className}`} {...props}>
@@ -40,4 +44,5 @@ export const CardFooter = ({ children, className = "", ...props }) => {
   );
 };
 
-export { Card, CardHeader, CardTitle, CardContent };
+// Default export for compatibility with existing imports
+export default Card;

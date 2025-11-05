@@ -1,9 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import logo from "../img/logo.png";
+import logo from "./img/logo.png"; // fixed typo
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faSearch, faShoppingCart, faUser, faStore, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faSearch,
+  faShoppingCart,
+  faUser,
+  faStore,
+  faSignInAlt,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faGoogle,
+  faInstagram,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
+
 
 export default function Home() {
   const [search, setSearch] = useState("");

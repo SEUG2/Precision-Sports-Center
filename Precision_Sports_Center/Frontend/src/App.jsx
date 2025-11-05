@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
-import About from "./Pages/about.jsx"; // ensure filename/casing matches actual file
+import About from "./Pages/About.jsx";
 import Shop from "./Pages/Shop.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
 import Cart from "./Pages/Cart.jsx";
 import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
-import Admin from "./Pages/Admin.jsx";
+import Admin from "./Pages/Admin.jsx"; // <- add this import
 import "./styles/global.css";
 
 export default function App() {
