@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Shop.css';
 import NavBar from '@/components/NavBar';
 import ProductCard from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';

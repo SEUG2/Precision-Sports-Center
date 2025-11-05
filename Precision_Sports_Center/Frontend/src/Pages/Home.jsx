@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import logo from "./img/logo.png"; // fixed typo
+import logo from "../img/logo.png"; // fixed typo
+import bg from "../img/bg.jpg"; // hero background
+import pfBoot from "../img/ProFootballBoot1.webp";
+import jerseyImg from "../img/TrainingJersey.jpeg";
+import glovesImg from "../img/GoalkeeperGloves.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -24,6 +28,7 @@ export default function Home() {
   const [shopOpen, setShopOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState(null); // which main category is expanded
   const shopRef = useRef(null);
+  const hoverTimerRef = useRef(null);
 
   useEffect(() => {
     const onDoc = (e) => {
@@ -36,17 +41,44 @@ export default function Home() {
     return () => window.removeEventListener("click", onDoc);
   }, []);
 
+  // clear any hover timer on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) {
+        clearTimeout(hoverTimerRef.current);
+        hoverTimerRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleShopMouseEnter = () => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+    setShopOpen(true);
+  };
+
+  const handleShopMouseLeave = () => {
+    // small delay before closing to avoid flicker when moving between button and menu
+    hoverTimerRef.current = setTimeout(() => {
+      setShopOpen(false);
+      setOpenCategory(null);
+      hoverTimerRef.current = null;
+    }, 250);
+  };
+
   const categories = [
-    { title: "Football", items: ["Boots", "Balls", "Gloves", "Jerseys"] },
-    { title: "Basketball", items: ["Balls", "Shoes", "Nets"] },
-    { title: "Gym & Fitness", items: ["Weights", "Mats", "Bands"] },
-    { title: "Accessories", items: ["Bags", "Bottles", "Tape"] },
+    { title: "Football", icon: "⚽", items: ["Boots", "Balls", "Gloves", "Jerseys"] },
+    { title: "Basketball", icon: "🏀", items: ["Balls", "Shoes", "Nets"] },
+    { title: "Gym & Fitness", icon: "🏋️‍♂️", items: ["Weights", "Mats", "Bands"] },
+    { title: "Accessories", icon: "🎒", items: ["Bags", "Bottles", "Tape"] },
   ];
 
   const featured = [
-    { id: 1, title: "Pro Football Boots", price: 450, img: "/img/product-1.jpg" },
-    { id: 2, title: "Training Jersey", price: 120, img: "/img/product-2.jpg" },
-    { id: 3, title: "Goalkeeper Gloves", price: 200, img: "/img/product-3.jpg" },
+    { id: 1, title: "Pro Football Boots", price: 450, img: pfBoot },
+    { id: 2, title: "Training Jersey", price: 120, img: jerseyImg },
+    { id: 3, title: "Goalkeeper Gloves", price: 200, img: glovesImg },
   ];
 
   return (
@@ -55,7 +87,7 @@ export default function Home() {
         <div className="header-inner">
           {/* LEFT: Shop dropdown then logo */}
           <div className="left-group">
-            <div className="shop-wrap" ref={shopRef}>
+            <div className="shop-wrap" ref={shopRef} onMouseEnter={handleShopMouseEnter} onMouseLeave={handleShopMouseLeave}>
               <button
                 className="shop-toggle"
                 onClick={(e) => {
@@ -153,7 +185,7 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="hero" style={{ backgroundImage: "url('/img/hero.jpg')" }}>
+  <section className="hero" style={{ backgroundImage: `url(${bg})` }}>
           <div className="hero-overlay" />
           <div className="hero-inner">
             <div className="hero-copy">
@@ -166,23 +198,6 @@ export default function Home() {
                 <Link to="/shop/football" className="btn btn-ghost">Football</Link>
               </div>
             </div>
-
-            <div className="hero-feature">
-              <div className="feature-card">
-                <img src="/img/product-1.jpg" alt="" />
-                <div className="feature-body">
-                  <strong>Pro Football Boots</strong>
-                  <span className="price">GHS 00.00</span>
-                </div>
-              </div>
-              <div className="feature-card">
-                <img src="/img/product-2.jpg" alt="" />
-                <div className="feature-body">
-                  <strong>Training Jersey</strong>
-                  <span className="price">GHS 00.00</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -192,7 +207,7 @@ export default function Home() {
             <div className="categories-grid">
               {categories.map((c) => (
                 <Link className="cat-card" key={c.title} to={`/shop/${c.title.toLowerCase()}`}>
-                  <div className="cat-media">{c.title[0]}</div>
+                  <div className="cat-media" aria-hidden="true">{c.icon}</div>
                   <div className="cat-title">{c.title}</div>
                   <div className="cat-sub">Browse {c.items.length} items</div>
                 </Link>
