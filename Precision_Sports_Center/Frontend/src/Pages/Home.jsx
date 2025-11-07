@@ -85,11 +85,39 @@ export default function Home() {
     <div className="page-root home kitking-like">
       <header className="site-header">
         <div className="header-inner">
-          {/* LEFT: Shop dropdown then logo */}
+          {/* LEFT: logo only */}
           <div className="left-group">
+            <Link to="/" className="site-brand" aria-label="Home">
+              <img src={logo} className="brand-logo" alt="Precision Sports Center" />
+            </Link>
+          </div>
+
+          {/* CENTER: search */}
+          <form
+            className="header-search"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("Search: " + (search || "[empty]"));
+            }}
+          >
+            <input
+              className="header-search-input"
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search your preferrence here..."
+              aria-label="Search products"
+            />
+            <button className="header-search-btn" aria-label="Search">
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+          </form>
+
+          {/* RIGHT: icon + label actions */}
+          <div className="right-actions">
             <div className="shop-wrap" ref={shopRef} onMouseEnter={handleShopMouseEnter} onMouseLeave={handleShopMouseLeave}>
               <button
-                className="shop-toggle"
+                className="shop-toggle nav-action nav-action-horizontal"
                 onClick={(e) => {
                   e.stopPropagation();
                   setShopOpen((s) => !s);
@@ -97,8 +125,11 @@ export default function Home() {
                 }}
                 aria-expanded={shopOpen}
               >
-                <FontAwesomeIcon icon={faStore} /> <span className="btn-label">Shop</span>
-                <FontAwesomeIcon icon={faChevronDown} className="chev" />
+                <div className="nav-action-content">
+                  <FontAwesomeIcon icon={faStore} />
+                  <span className="action-label">Shop</span>
+                  <FontAwesomeIcon icon={faChevronDown} className="chev" style={{ marginLeft: '4px' }} />
+                </div>
               </button>
 
               <div className={`shop-mega ${shopOpen ? "open" : ""}`} role="menu" aria-hidden={!shopOpen}>
@@ -131,39 +162,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            <Link to="/" className="site-brand" aria-label="Home">
-              <img src={logo} className="brand-logo" alt="Precision Sports Center" />
-            </Link>
-          </div>
-
-          {/* CENTER: search */}
-          <form
-            className="header-search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Search: " + (search || "[empty]"));
-            }}
-          >
-            <input
-              className="header-search-input"
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search your preferrence here..."
-              aria-label="Search products"
-            />
-            <button className="header-search-btn" aria-label="Search">
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </form>
-
-          {/* RIGHT: icon + label actions */}
-          <div className="right-actions">
-            <Link to="/shop" className="nav-action">
-              <FontAwesomeIcon icon={faStore} />
-              <span className="action-label">Shop</span>
-            </Link>
 
             <Link to="/about" className="nav-action">
               <FontAwesomeIcon icon={faUser} />
