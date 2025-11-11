@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import logo from "../img/logo.png"; // fixed typo
@@ -6,14 +6,21 @@ import bg from "../img/bg.jpg"; // hero background
 import pfBoot from "../img/ProFootballBoot1.webp";
 import jerseyImg from "../img/TrainingJersey.jpeg";
 import glovesImg from "../img/GoalkeeperGloves.jpeg";
+import footballCard from "../img/footbll-card.webp";
+import basketballCard from "../img/basketball-card.webp";
+import gymCard from "../img/gym-card.webp";
+import accessoriesCard from "../img/ascessories-card.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import {
-  faChevronDown,
-  faSearch,
-  faShoppingCart,
-  faUser,
-  faStore,
-  faSignInAlt,
+  faMagnifyingGlass,
+  faCartShopping,
+  faCircleInfo,
+  faBagShopping,
+  faArrowRightToBracket,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -25,55 +32,80 @@ import {
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [shopOpen, setShopOpen] = useState(false);
-  const [openCategory, setOpenCategory] = useState(null); // which main category is expanded
-  const shopRef = useRef(null);
-  const hoverTimerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= 768;
+  });
 
   useEffect(() => {
-    const onDoc = (e) => {
-      if (shopRef.current && !shopRef.current.contains(e.target)) {
-        setShopOpen(false);
-        setOpenCategory(null);
-      }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
-    window.addEventListener("click", onDoc);
-    return () => window.removeEventListener("click", onDoc);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // clear any hover timer on unmount
-  useEffect(() => {
-    return () => {
-      if (hoverTimerRef.current) {
-        clearTimeout(hoverTimerRef.current);
-        hoverTimerRef.current = null;
-      }
-    };
-  }, []);
-
-  const handleShopMouseEnter = () => {
-    if (hoverTimerRef.current) {
-      clearTimeout(hoverTimerRef.current);
-      hoverTimerRef.current = null;
-    }
-    setShopOpen(true);
-  };
-
-  const handleShopMouseLeave = () => {
-    // small delay before closing to avoid flicker when moving between button and menu
-    hoverTimerRef.current = setTimeout(() => {
-      setShopOpen(false);
-      setOpenCategory(null);
-      hoverTimerRef.current = null;
-    }, 250);
-  };
 
   const categories = [
-    { title: "Football", icon: "⚽", items: ["Boots", "Balls", "Gloves", "Jerseys"] },
-    { title: "Basketball", icon: "🏀", items: ["Balls", "Shoes", "Nets"] },
-    { title: "Gym & Fitness", icon: "🏋️‍♂️", items: ["Weights", "Mats", "Bands"] },
-    { title: "Accessories", icon: "🎒", items: ["Bags", "Bottles", "Tape"] },
+    {
+      title: "Football",
+      mediaType: "image",
+      icon: footballCard,
+      imageFit: "contain",
+      items: ["Boots", "Balls", "Gloves", "Jerseys"],
+    },
+    {
+      title: "Basketball",
+      mediaType: "image",
+      icon: basketballCard,
+      imageFit: "contain",
+      items: ["Balls", "Shoes", "Nets"],
+    },
+    {
+      title: "Gym & Fitness",
+      mediaType: "image",
+      icon: gymCard,
+      imageFit: "cover",
+      items: ["Weights", "Mats", "Bands"],
+    },
+    {
+      title: "Accessories",
+      mediaType: "image",
+      icon: accessoriesCard,
+      imageFit: "cover",
+      items: ["Bags", "Bottles", "Tape"],
+    },
   ];
+
+  const renderCategoryCard = (category, extraClass = "") => (
+    <Link
+      className={`cat-card ${extraClass}`.trim()}
+      key={category.title}
+      to={`/shop/${category.title.toLowerCase()}`}
+    >
+      <div className="cat-media" aria-hidden="true">
+        {category.mediaType === "image" ? (
+          <img
+            src={category.icon}
+            alt={`${category.title} category`}
+            className={`cat-image ${category.imageFit === "contain" ? "cat-image-contain" : ""}`.trim()}
+            loading="lazy"
+          />
+        ) : (
+          <span className="cat-emoji">{category.icon}</span>
+        )}
+      </div>
+      <div className="cat-title">{category.title}</div>
+      <ul className="cat-items">
+        {category.items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <span className="cat-browse-btn">
+        Browse all items
+      </span>
+    </Link>
+  );
 
   const featured = [
     { id: 1, title: "Pro Football Boots", price: 450, img: pfBoot },
@@ -85,8 +117,9 @@ export default function Home() {
     <div className="page-root home kitking-like">
       <header className="site-header">
         <div className="header-inner">
-          {/* LEFT: logo only */}
+          {/* LEFT: empty for desktop, logo will be centered on mobile via CSS */}
           <div className="left-group">
+            {/* Logo is here for desktop layout */}
             <Link to="/" className="site-brand" aria-label="Home">
               <img src={logo} className="brand-logo" alt="Precision Sports Center" />
             </Link>
@@ -109,72 +142,29 @@ export default function Home() {
               aria-label="Search products"
             />
             <button className="header-search-btn" aria-label="Search">
-              <FontAwesomeIcon icon={faSearch} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </form>
 
           {/* RIGHT: icon + label actions */}
           <div className="right-actions">
-            <div className="shop-wrap" ref={shopRef} onMouseEnter={handleShopMouseEnter} onMouseLeave={handleShopMouseLeave}>
-              <button
-                className="shop-toggle nav-action nav-action-horizontal"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShopOpen((s) => !s);
-                  if (shopOpen) setOpenCategory(null);
-                }}
-                aria-expanded={shopOpen}
-              >
-                <div className="nav-action-content">
-                  <FontAwesomeIcon icon={faStore} />
-                  <span className="action-label">Shop</span>
-                  <FontAwesomeIcon icon={faChevronDown} className="chev" style={{ marginLeft: '4px' }} />
-                </div>
-              </button>
-
-              <div className={`shop-mega ${shopOpen ? "open" : ""}`} role="menu" aria-hidden={!shopOpen}>
-                <div className="mega-accordion">
-                  {categories.map((c) => (
-                    <div className="mega-accordion-item" key={c.title}>
-                      <button
-                        className={`mega-accordion-btn ${openCategory === c.title ? "active" : ""}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenCategory((prev) => (prev === c.title ? null : c.title));
-                        }}
-                        aria-expanded={openCategory === c.title}
-                      >
-                        <span className="mega-title">{c.title}</span>
-                        <FontAwesomeIcon icon={faChevronDown} className="chev small" />
-                      </button>
-
-                      <ul className={`mega-sublist ${openCategory === c.title ? "open" : ""}`}>
-                        {c.items.map((it) => (
-                          <li key={it}>
-                            <Link to={`/shop/${c.title.toLowerCase()}`} className="mega-link" onClick={() => setShopOpen(false)}>
-                              {it}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <Link to="/shop" className="nav-action">
+              <FontAwesomeIcon icon={faBagShopping} />
+              <span className="action-label">Shop</span>
+            </Link>
 
             <Link to="/about" className="nav-action">
-              <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={faCircleInfo} />
               <span className="action-label">About</span>
             </Link>
 
             <Link to="/login" className="nav-action">
-              <FontAwesomeIcon icon={faSignInAlt} />
+              <FontAwesomeIcon icon={faArrowRightToBracket} />
               <span className="action-label">Login</span>
             </Link>
 
             <Link to="/cart" className="nav-action cart-action">
-              <FontAwesomeIcon icon={faShoppingCart} />
+              <FontAwesomeIcon icon={faCartShopping} />
               <span className="action-label">Cart</span>
               <span className="cart-count">2</span>
             </Link>
@@ -202,15 +192,26 @@ export default function Home() {
         <section className="categories">
           <div className="container">
             <h2 className="section-title">Shop by category</h2>
-            <div className="categories-grid">
-              {categories.map((c) => (
-                <Link className="cat-card" key={c.title} to={`/shop/${c.title.toLowerCase()}`}>
-                  <div className="cat-media" aria-hidden="true">{c.icon}</div>
-                  <div className="cat-title">{c.title}</div>
-                  <div className="cat-sub">Browse {c.items.length} items</div>
-                </Link>
-              ))}
-            </div>
+            {isMobile ? (
+              <Swiper
+                modules={[Autoplay, Pagination]}
+                autoplay={{ delay: 2000, disableOnInteraction: false }}
+                pagination={{ clickable: true }}
+                loop
+                className="mobile-category-swiper"
+                spaceBetween={16}
+              >
+                {categories.map((category) => (
+                  <SwiperSlide key={category.title}>
+                    {renderCategoryCard(category, "cat-card-mobile")}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <div className="categories-grid">
+                {categories.map((category) => renderCategoryCard(category))}
+              </div>
+            )}
           </div>
         </section>
 
@@ -268,6 +269,30 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="mobile-bottom-nav">
+        <Link to="/shop" className="nav-action">
+          <FontAwesomeIcon icon={faBagShopping} />
+          <span className="action-label">Shop</span>
+        </Link>
+
+        <Link to="/about" className="nav-action">
+          <FontAwesomeIcon icon={faCircleInfo} />
+          <span className="action-label">About</span>
+        </Link>
+
+        <Link to="/login" className="nav-action">
+          <FontAwesomeIcon icon={faArrowRightToBracket} />
+          <span className="action-label">Login</span>
+        </Link>
+
+        <Link to="/cart" className="nav-action cart-action">
+          <FontAwesomeIcon icon={faCartShopping} />
+          <span className="action-label">Cart</span>
+          <span className="cart-count">2</span>
+        </Link>
+      </nav>
     </div>
   );
 }
