@@ -322,7 +322,7 @@ function Shop() {
           <div className="hero-inner">
             <div className="hero-card">
               <span className="hero-kicker">Welcome to</span>
-              <h1>Precision Sports Center</h1>
+              <h1>Precision Sports Center SHOP</h1>
               <p className="lead">
                 Find gear that keeps pace. Pro-quality kits, footwear and accessories curated for clubs,
                 academies and ambitious athletes.
