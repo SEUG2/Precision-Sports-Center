@@ -173,6 +173,14 @@ html, body, #root {
 }
 .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,18,46,0.6) 0%, rgba(11,114,245,0.12) 60%); }
 .hero-inner { position:relative; z-index:2; max-width:1180px; margin:0 auto; padding:48px 16px; display:flex; gap:28px; align-items:center; justify-content:space-between; }
+.hero-copy { max-width: 560px; display: flex; flex-direction: column; gap: 18px; }
+.hero-copy h1 { font-size: clamp(2.8rem, 5vw, 4rem); margin: 0; line-height: 1.05; letter-spacing: -0.02em; }
+.hero-copy .lead { font-size: 1.15rem; line-height: 1.6; margin: 0; color: rgba(255,255,255,0.86); }
+.hero-ctas { display:flex; flex-wrap:wrap; gap:12px; }
+.hero-ctas .btn { padding: 12px 24px; border-radius: 999px; text-decoration:none; font-weight:700; border:1px solid rgba(255,255,255,0.4); transition: transform 120ms ease, box-shadow 120ms ease; }
+.hero-ctas .btn-primary { background:#0b72f5; border-color:#0b72f5; color:#fff; box-shadow:0 10px 24px rgba(11,114,245,0.35); }
+.hero-ctas .btn-primary:hover { transform:translateY(-2px); }
+.hero-ctas .btn-ghost { background:rgba(255,255,255,0.1); color:#fff; }
 
 /* categories and featured (unchanged) */
 .categories { padding:36px 0; }
@@ -250,6 +258,8 @@ html, body, #root {
   .left-group { width:100%; justify-content:center; }
   .brand-logo { height:84px; width:auto; }
   .hero { min-height:320px; }
+  .hero-inner { flex-direction:column; align-items:flex-start; gap:20px; }
+  .hero-copy { width:100%; gap:16px; }
   .mega-grid { grid-template-columns: 1fr; gap:12px; }
   .shop-mega {
     left: 8px;

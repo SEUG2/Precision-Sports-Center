@@ -1,0 +1,126 @@
+/* About page styling */
+.about-page {
+  padding: 72px 16px 120px;
+  background: linear-gradient(180deg, #f5f7fb 0%, #ffffff 70%);
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.about-hero {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 32px;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+}
+
+.about-hero .hero-kicker {
+  font-size: 0.9rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8091c1;
+  margin-bottom: 12px;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin-bottom: 18px;
+  color: #0f172a;
+}
+
+.about-hero p {
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.about-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.06);
+}
+
+.about-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.about-card p {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.feedback-card {
+  background: #0f172a;
+  color: #fff;
+  border-radius: 24px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: center;
+}
+
+.feedback-card h2 {
+  font-size: 1.7rem;
+  margin-bottom: 12px;
+}
+
+.feedback-card p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feedback-form textarea {
+  min-height: 120px;
+  border-radius: 16px;
+  border: none;
+  padding: 16px;
+  resize: vertical;
+  font-size: 1rem;
+}
+
+.feedback-form button {
+  align-self: flex-end;
+  background: #f4b400;
+  color: #0f172a;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .about-page {
+    padding: 48px 12px 96px;
+  }
+
+  .about-hero {
+    padding: 36px 20px;
+  }
+
+  .feedback-card {
+    padding: 24px;
+  }
+}

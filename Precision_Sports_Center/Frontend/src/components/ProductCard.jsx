@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Star, ShoppingCart } from 'lucide-react';
 import React from "react";
 import { formatGHS } from "../lib/formatCurrency";
+import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
   const {
@@ -19,6 +20,20 @@ const ProductCard = ({ product }) => {
     isOnSale = false,
     inStock = true
   } = product;
+  const { addItem, items } = useCart();
+  const isInCart = items.some((item) => item.id === id);
+
+  const handleAddToCart = () => {
+    if (!inStock) return;
+    addItem({
+      id,
+      title: name,
+      price,
+      originalPrice,
+      image,
+      inStock,
+    });
+  };
 
   const discountPercentage = originalPrice 
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
@@ -103,9 +118,10 @@ const ProductCard = ({ product }) => {
           className="w-full" 
           disabled={!inStock}
           size="sm"
+          onClick={handleAddToCart}
         >
           <ShoppingCart className="h-4 w-4 mr-2" />
-          {inStock ? 'Add to Cart' : 'Out of Stock'}
+          {inStock ? (isInCart ? 'Added' : 'Add to Cart') : 'Out of Stock'}
         </Button>
       </CardFooter>
     </Card>

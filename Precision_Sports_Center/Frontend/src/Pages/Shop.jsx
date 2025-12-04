@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import "./Shop.css";
-import logo from "../img/logo.png";
 import bg from "../img/bg2.jpg";
 import pfBoot from "../img/ProFootballBoot1.webp";
 import jerseyImg from "../img/TrainingJersey.jpeg";
@@ -11,17 +10,9 @@ import basketballCard from "../img/basketball-card.webp";
 import accessoriesCard from "../img/ascessories-card.webp";
 import gymCard from "../img/gym-card.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRightToBracket,
-  faBagShopping,
-  faCartShopping,
-  faCircleInfo,
-  faEnvelope,
-  faMagnifyingGlass,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
-import { faGoogle, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { formatGHS } from "../lib/formatCurrency";
+import { useCart } from "../context/CartContext";
 
 const categories = [
   {
@@ -55,6 +46,39 @@ const categories = [
 ];
 
 const filterCategories = ["All", ...categories.map((c) => c.title)];
+
+const heroQuickLinks = [
+  {
+    label: "Football Store",
+    description: "Boots, kits & balls",
+    to: "/shop/football",
+  },
+  {
+    label: "Boot Wall",
+    description: "Firm ground & turf",
+    to: "/shop?q=boots",
+  },
+  {
+    label: "Jersey Hub",
+    description: "Club & national drops",
+    to: "/shop?q=jersey",
+  },
+  {
+    label: "Basketball Hub",
+    description: "Shoes & court gear",
+    to: "/shop/basketball",
+  },
+  {
+    label: "Gym Essentials",
+    description: "Bands, mats & recovery",
+    to: `/shop/${encodeURIComponent("Gym & Fitness")}`,
+  },
+  {
+    label: "Accessories",
+    description: "Bags, bottles, tape",
+    to: "/shop/accessories",
+  },
+];
 
 const products = [
   {
@@ -164,7 +188,6 @@ const products = [
 ];
 
 function Shop() {
-  const [search, setSearch] = useState("");
   const [productSearch, setProductSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [minPrice, setMinPrice] = useState(0);
@@ -172,6 +195,44 @@ function Shop() {
   const [inStockOnly, setInStockOnly] = useState(false);
   const [onSaleOnly, setOnSaleOnly] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
+  const { addItem, items: cartItems } = useCart();
+  const { category: categoryParam } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!categoryParam) return;
+    const normalized = decodeURIComponent(categoryParam).replace(/-/g, " ").toLowerCase();
+    const matchingCategory = filterCategories.find(
+      (categoryOption) => categoryOption.toLowerCase() === normalized,
+    );
+
+    if (matchingCategory) {
+      setSelectedCategory(matchingCategory);
+      setProductSearch("");
+    } else {
+      setSelectedCategory("All");
+      setProductSearch(normalized);
+    }
+  }, [categoryParam]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get("q");
+    if (query !== null) {
+      setProductSearch(query);
+      setSelectedCategory("All");
+    }
+  }, [location.search]);
+  const handleAddToCart = (product) => {
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.img,
+      originalPrice: product.originalPrice,
+      inStock: product.inStock,
+    });
+  };
   const clampMinPrice = (value) => {
     const numeric = Number.isNaN(Number(value)) ? 0 : Number(value);
     return Math.max(0, Math.min(numeric, maxPrice));
@@ -210,7 +271,9 @@ function Shop() {
     ));
   };
 
-  const renderProductCard = (product) => (
+  const renderProductCard = (product) => {
+    const isProductInCart = cartItems.some((item) => item.id === product.id);
+    return (
     <article
       className={`shop-product-card ${viewMode === "list" ? "list" : ""}`.trim()}
       key={product.id}
@@ -244,13 +307,19 @@ function Shop() {
             ) : null}
           </div>
 
-          <button className="btn btn-sm" type="button" disabled={!product.inStock}>
-            {product.inStock ? "Add" : "Notify"}
+          <button
+            className="btn btn-sm"
+            type="button"
+            disabled={!product.inStock}
+            onClick={() => handleAddToCart(product)}
+          >
+            {product.inStock ? (isProductInCart ? "Add more" : "Add") : "Notify"}
           </button>
         </div>
       </div>
     </article>
   );
+  };
 
   const resetFilters = () => {
     setSelectedCategory("All");
@@ -263,77 +332,36 @@ function Shop() {
 
   return (
     <div className="page-root shop kitking-like">
-      <header className="site-header">
-        <div className="header-inner">
-          <div className="left-group">
-            <Link to="/" className="site-brand" aria-label="Home">
-              <img src={logo} className="brand-logo" alt="Precision Sports Center" />
-            </Link>
-          </div>
-
-          <form
-            className="header-search"
-            onSubmit={(event) => {
-              event.preventDefault();
-              alert("Search: " + (search || "[empty]"));
-            }}
-          >
-            <input
-              className="header-search-input"
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search your preference here..."
-              aria-label="Search products"
-            />
-            <button className="header-search-btn" aria-label="Search">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-          </form>
-
-          <div className="right-actions">
-            <Link to="/shop" className="nav-action">
-              <FontAwesomeIcon icon={faBagShopping} />
-              <span className="action-label">Shop</span>
-            </Link>
-
-            <Link to="/about" className="nav-action">
-              <FontAwesomeIcon icon={faCircleInfo} />
-              <span className="action-label">About</span>
-            </Link>
-
-            <Link to="/login" className="nav-action">
-              <FontAwesomeIcon icon={faArrowRightToBracket} />
-              <span className="action-label">Login</span>
-            </Link>
-
-            <Link to="/cart" className="nav-action cart-action">
-              <FontAwesomeIcon icon={faCartShopping} />
-              <span className="action-label">Cart</span>
-              <span className="cart-count">2</span>
-            </Link>
-          </div>
-        </div>
-      </header>
-
       <main className="shop-main">
         <section className="hero shop-hero" style={{ backgroundImage: `url(${bg})` }}>
           <div className="hero-overlay" />
           <div className="hero-inner">
             <div className="hero-card">
               <span className="hero-kicker">Welcome to</span>
-              <h1>Precision Sports Center SHOP</h1>
+              <h1>Precision Sports Center Shop</h1>
               <p className="lead">
                 Find gear that keeps pace. Pro-quality kits, footwear and accessories curated for clubs,
                 academies and ambitious athletes.
               </p>
-              <div className="hero-ctas">
-                <Link to="/shop/football" className="btn btn-primary">
-                  Football Store
-                </Link>
-                <Link to="/shop" className="btn btn-ghost">
-                  Browse everything
-                </Link>
+            </div>
+            <div className="hero-links-panel" aria-label="Shop highlights">
+              <div className="hero-links-copy">
+                <span className="hero-links-kicker">Shop faster</span>
+                <h3>Jump into featured collections</h3>
+                <p>
+                  Shortcut to the gear customers request most—no extra clicks required.
+                </p>
+              </div>
+              <div className="hero-quick-links">
+                {heroQuickLinks.map((link) => (
+                  <Link key={link.label} to={link.to} className="hero-link-card">
+                    <div className="hero-link-text">
+                      <span className="hero-link-label">{link.label}</span>
+                      <span className="hero-link-desc">{link.description}</span>
+                    </div>
+                    <span className="hero-link-arrow" aria-hidden="true">→</span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -358,22 +386,6 @@ function Shop() {
                     placeholder="Boots, jerseys, bottles..."
                     autoComplete="off"
                   />
-                </div>
-
-                <div className="filter-block">
-                  <label>Category</label>
-                  <div className="filter-chips">
-                    {filterCategories.map((category) => (
-                      <button
-                        type="button"
-                        className={`filter-chip ${selectedCategory === category ? "active" : ""}`.trim()}
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="filter-block">
@@ -461,80 +473,6 @@ function Shop() {
           </div>
         </section>
       </main>
-
-      <footer className="site-footer">
-        <div className="container footer-inner">
-          <div className="footer-left">
-            <img src={logo} alt="Precision logo" className="footer-logo" />
-            <p>Precision Sports Center — gear, coaching & community.</p>
-          </div>
-
-          <div className="footer-center">
-            <div className="social" role="navigation" aria-label="Social links">
-              <a href="mailto:xorlaliadogoh@gmail.com" aria-label="Email">
-                <FontAwesomeIcon icon={faEnvelope} />
-              </a>
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Gmail"
-              >
-                <FontAwesomeIcon icon={faGoogle} />
-              </a>
-              <a
-                href="https://www.instagram.com/precisionsports_gh"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <FontAwesomeIcon icon={faInstagram} />
-              </a>
-              <a
-                href="https://www.tiktok.com/@precisionsports_gh"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-              >
-                <FontAwesomeIcon icon={faTiktok} />
-              </a>
-            </div>
-            <small>© 2025 Precision Sports Center</small>
-          </div>
-
-          <div className="footer-right">
-            <Link to="/contact" className="footer-link">
-              Contact
-            </Link>
-            <Link to="/about" className="footer-link">
-              About
-            </Link>
-          </div>
-        </div>
-      </footer>
-
-      <nav className="mobile-bottom-nav">
-        <Link to="/shop" className="nav-action">
-          <FontAwesomeIcon icon={faBagShopping} />
-          <span className="action-label">Shop</span>
-        </Link>
-
-        <Link to="/about" className="nav-action">
-          <FontAwesomeIcon icon={faCircleInfo} />
-          <span className="action-label">About</span>
-        </Link>
-
-        <Link to="/login" className="nav-action">
-          <FontAwesomeIcon icon={faArrowRightToBracket} />
-          <span className="action-label">Login</span>
-        </Link>
-
-        <Link to="/cart" className="nav-action cart-action">
-          <FontAwesomeIcon icon={faCartShopping} />
-          <span className="action-label">Cart</span>
-          <span className="cart-count">2</span>
-        </Link>
-      </nav>
     </div>
   );
 }

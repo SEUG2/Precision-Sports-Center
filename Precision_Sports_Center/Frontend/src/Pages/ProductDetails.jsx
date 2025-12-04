@@ -8,6 +8,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Star, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw, Minus, Plus } from 'lucide-react';
+import { formatGHS } from '@/lib/formatCurrency';
+
+const FREE_SHIPPING_THRESHOLD = 100;
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -171,11 +174,11 @@ const ProductDetails = () => {
               {/* Price */}
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl font-bold text-foreground">
-                  ${product.price}
+                  {formatGHS(product.price)}
                 </span>
                 {product.originalPrice && product.originalPrice > product.price && (
                   <span className="text-xl text-muted-foreground line-through">
-                    ${product.originalPrice}
+                    {formatGHS(product.originalPrice)}
                   </span>
                 )}
               </div>
@@ -255,7 +258,7 @@ const ProductDetails = () => {
             <div className="space-y-4">
               <Button size="lg" className="w-full">
                 <ShoppingCart className="mr-2 h-5 w-5" />
-                Add to Cart - ${(product.price * quantity).toFixed(2)}
+                Add to Cart - {formatGHS(product.price * quantity)}
               </Button>
               
               <div className="flex gap-4">
@@ -275,7 +278,7 @@ const ProductDetails = () => {
               <div className="text-center">
                 <Truck className="h-8 w-8 text-primary mx-auto mb-2" />
                 <p className="text-sm font-medium">Free Shipping</p>
-                <p className="text-xs text-muted-foreground">Orders over $50</p>
+                <p className="text-xs text-muted-foreground">Orders over {formatGHS(FREE_SHIPPING_THRESHOLD)}</p>
               </div>
               <div className="text-center">
                 <RotateCcw className="h-8 w-8 text-primary mx-auto mb-2" />

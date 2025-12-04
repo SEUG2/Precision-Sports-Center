@@ -43,6 +43,18 @@ body {
     overflow-x: hidden;
 }
 
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--background);
+}
+
+.app-main {
+    flex: 1;
+    width: 100%;
+}
+
 /* Utility container */
 .container { width:100%; max-width:1180px; margin:0 auto; padding:0 16px; box-sizing:border-box; }
 
@@ -265,6 +277,21 @@ body {
 
 .nav-action:hover {
     background: rgba(11,114,245,0.08);
+    color: #0b72f5;
+}
+
+.nav-action.active {
+    background: #0b72f5;
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(11,114,245,0.35);
+}
+
+.nav-action.active svg {
+    color: inherit;
+}
+
+.nav-action.active .cart-count {
+    background: #ffffff;
     color: #0b72f5;
 }
 
@@ -817,70 +844,112 @@ body {
 }
 
 /* Footer */
+
 .site-footer {
     background: var(--secondary);
-    color: #fff;
-    padding: 80px 24px 40px;
+    color: #f8fafc;
+    padding: 48px 20px 32px;
     margin-top: 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .footer-inner {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    align-items: flex-start;
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .footer-logo {
-    width: 180px;
+    width: 150px;
     height: auto;
     display: block;
-    margin-bottom: 20px;
 }
 
 .footer-about {
-    color: #9ca3af;
+    color: #dbeafe;
     line-height: 1.6;
-    margin-bottom: 24px;
-    max-width: 380px;
+    margin: 0;
+    max-width: 320px;
 }
 
 .footer-title {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
+    margin: 0;
+    color: #ffffff;
 }
 
-.footer-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
+.footer-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #cfd9f2;
 }
 
-/* Social icons */
-.social { display:flex; gap:10px; align-items:center; justify-content:flex-start; }
-.footer-center { display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
-.social a { display:inline-grid; place-items:center; width:44px; height:44px; border-radius:8px; background:transparent; color:#d6e9ff; text-decoration:none; font-size:18px; transition:all .14s ease; border:1px solid rgba(255,255,255,0.04); }
-.social a:hover { background:#fff; color:#0b72f5; transform:translateY(-3px); box-shadow:0 8px 18px rgba(2,6,23,0.06); }
+.footer-list li {
+    font-size: 0.95rem;
+}
 
-/* Footer links */
-.footer-right { display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
-.footer-link { color:#cfe6ff; text-decoration:none; font-weight:700; }
-.footer-link:hover { color:#fff; text-decoration:underline; }
+.footer-links ul,
+.footer-links .footer-list { gap: 10px; }
+
+.footer-links a { color: #f8fafc; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; color: #90cdf4; }
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.footer-social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    display: grid;
+    place-items: center;
+    color: #f8fafc;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.footer-social a:hover {
+    border-color: #fef3c7;
+    color: #fef3c7;
+    transform: translateY(-2px);
+}
+
+.footer-policy p {
+    margin: 0;
+    color: #d1d5db;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    color: #cbd5f5;
+    font-size: 0.85rem;
+}
 
 /* Shop page specific helpers (imported by Shop.css, but safe here) */
 .shop-page { width:100%; padding:28px 16px; }
