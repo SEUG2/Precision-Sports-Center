@@ -8,7 +8,9 @@ import {
   faCartShopping,
   faMagnifyingGlass,
   faHouse,
+  faPhoneVolume,
 } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF, faInstagram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";
 import { useCart } from "../../context/CartContext";
 
@@ -57,6 +59,31 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
+      <div className="header-top">
+        <div className="header-top-inner">
+          <div className="header-contact">
+            <FontAwesomeIcon icon={faPhoneVolume} aria-hidden="true" />
+            <span>Contact 0549807848 / 0530518486</span>
+            <span className="dot" aria-hidden="true">•</span>
+            <a href="mailto:info@sportsmallgh.com">info@sportsmallgh.com</a>
+          </div>
+          <div className="header-social" role="navigation" aria-label="Social media links">
+            <a href="https://wa.me/233549807848" target="_blank" rel="noopener noreferrer" aria-label="Whatsapp">
+              <FontAwesomeIcon icon={faWhatsapp} />
+            </a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <FontAwesomeIcon icon={faTwitter} />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="header-main">
       <div className="header-inner">
         <div className="left-group">
           <Link to="/" className="site-brand" aria-label="Home">
@@ -101,6 +128,7 @@ export default function SiteHeader() {
             {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
           </Link>
         </div>
+      </div>
       </div>
     </header>
   );

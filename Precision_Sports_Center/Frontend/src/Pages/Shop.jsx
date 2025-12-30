@@ -187,6 +187,40 @@ const products = [
   },
 ];
 
+const shopStats = [
+  { id: "jerseys", value: "450+", label: "Club & national jerseys on hand" },
+  { id: "boots", value: "120", label: "Boot styles across all surfaces" },
+  { id: "teams", value: "65", label: "Teams outfitted this season" },
+  { id: "rating", value: "4.9/5", label: "Customer satisfaction rating" },
+];
+
+const categoryPills = [
+  { id: "all", label: "All gear", value: "All" },
+  ...categories.map((category) => ({
+    id: category.title.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+    label: category.title,
+    value: category.title,
+  })),
+];
+
+const serviceAssurance = [
+  {
+    id: "exchange",
+    title: "Size exchanges",
+    description: "Swap sizes within seven days on unworn jerseys and boots.",
+  },
+  {
+    id: "support",
+    title: "Club specialists",
+    description: "Dedicated consultants to manage academy and corporate kit briefs.",
+  },
+  {
+    id: "fulfilment",
+    title: "Rapid fulfilment",
+    description: "Same-day Accra dispatch with nationwide courier coverage in 48 hours.",
+  },
+];
+
 function Shop() {
   const [productSearch, setProductSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -259,6 +293,11 @@ function Shop() {
 
     return matchesSearch && matchesCategory && matchesPrice && matchesStock && matchesSale;
   });
+
+  const handleSelectCategory = (category) => {
+    setSelectedCategory(category);
+    setProductSearch("");
+  };
 
   const renderStars = (rating) => {
     const rounded = Math.round(rating);
@@ -343,6 +382,14 @@ function Shop() {
                 Find gear that keeps pace. Pro-quality kits, footwear and accessories curated for clubs,
                 academies and ambitious athletes.
               </p>
+              <div className="hero-ctas">
+                <Link to="/shop" className="btn btn-primary">
+                  Browse latest drops
+                </Link>
+                <Link to="/contact" className="btn btn-outline">
+                  Talk to a specialist
+                </Link>
+              </div>
             </div>
             <div className="hero-links-panel" aria-label="Shop highlights">
               <div className="hero-links-copy">
@@ -367,8 +414,32 @@ function Shop() {
           </div>
         </section>
 
+        <section className="shop-stats" aria-label="Store stats">
+          <div className="stats-grid">
+            {shopStats.map((stat) => (
+              <article key={stat.id} className="stat-card">
+                <span className="stat-value">{stat.value}</span>
+                <span className="stat-label">{stat.label}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="shop-section">
           <div className="container">
+            <div className="shop-category-pills" role="tablist" aria-label="Browse by category">
+              {categoryPills.map((pill) => (
+                <button
+                  key={pill.id}
+                  type="button"
+                  className={`category-pill ${selectedCategory === pill.value ? "active" : ""}`.trim()}
+                  onClick={() => handleSelectCategory(pill.value)}
+                >
+                  {pill.label}
+                </button>
+              ))}
+            </div>
+
             <div className="shop-layout">
               <aside className="shop-filters">
                 <header className="filters-header">
@@ -470,6 +541,20 @@ function Shop() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="shop-services" aria-label="Store services and guarantees">
+          <div className="services-grid">
+            {serviceAssurance.map((service) => (
+              <article key={service.id} className="service-card">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+                <Link to="/contact" className="service-link">
+                  Speak to support
+                </Link>
+              </article>
+            ))}
           </div>
         </section>
       </main>

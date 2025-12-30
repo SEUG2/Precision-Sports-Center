@@ -13,16 +13,20 @@
 }
 
 :root {
-    --primary: #d21c1c;
-    --primary-dark: #b71818;
-    --secondary: #222222;
-    --text: #333333;
-    --light-text: #666666;
+    --primary: #0f3679;
+    --primary-dark: #0c2a5d;
+    --accent: #bf1415;
+    --accent-dark: #9f1112;
+    --secondary: #091a3a;
+    --text: #1b2131;
+    --light-text: #5a6477;
     --background: #ffffff;
-    --light-bg: #f8f9fa;
-    --border: #e5e7eb;
-    --radius: 8px;
-    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --surface: #f4f6fb;
+    --surface-strong: #e5ecfb;
+    --light-bg: #f4f6fb;
+    --border: #d6deef;
+    --radius: 10px;
+    --shadow: 0 10px 25px rgba(9, 26, 58, 0.12);
     --transition: all 0.3s ease;
 }
 
@@ -81,18 +85,18 @@ body {
 
 .btn-primary {
     background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 15px rgba(210, 28, 28, 0.25);
+    color: #ffffff;
+    box-shadow: 0 12px 24px rgba(15, 54, 121, 0.28);
 }
 
 .btn-primary:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(210, 28, 28, 0.35);
+    box-shadow: 0 16px 32px rgba(12, 42, 93, 0.32);
 }
 
     .nav-action:hover {
-        background: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.12);
         color: #ffffff;
         transform: translateY(-2px);
     }
@@ -145,15 +149,84 @@ body {
     position: sticky;
     top: 0;
     z-index: 60;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border-bottom: 1px solid rgba(2,6,23,0.06);
-    transition: all 0.3s ease;
-    height: 120px; /* increased for logo clarity */
+    width: 100%;
+    background: transparent;
+    transition: var(--transition);
+    font-family: 'Protest Guerrilla', sans-serif;
+    box-shadow: 0 16px 36px rgba(9, 26, 58, 0.15);
+}
+
+.header-top {
+    background: var(--primary-dark);
+    color: #f6f9ff;
+}
+
+.header-top-inner {
+    max-width: 1440px;
+    width: 92%;
+    margin: 0 auto;
+    padding: 8px 0;
     display: flex;
     align-items: center;
-    font-family: 'Protest Guerrilla', sans-serif;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.header-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.header-contact a {
+    color: #dce8ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.header-contact a:hover {
+    text-decoration: underline;
+}
+
+.header-contact svg {
+    font-size: 0.9rem;
+    color: #dce8ff;
+}
+
+.header-contact .dot {
+    font-size: 0.9rem;
+    color: rgba(220, 232, 255, 0.7);
+}
+
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-social a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #f6f9ff;
+    background: rgba(255,255,255,0.15);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.header-social a:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.28);
+}
+
+.header-main {
+    background: var(--primary);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
 .header-inner {
@@ -164,43 +237,29 @@ body {
     max-width: 1440px;
     margin: 0 auto;
     width: 92%;
-    height: 100%;
-    position: relative;
-    padding: 12px 0;
+    padding: 16px 0;
 }
 
-.left-group, .right-actions {
+.left-group,
+.right-actions {
     display: flex;
     align-items: center;
     gap: 24px;
-    height: 100%;
 }
 
 .left-group {
     flex: 0 0 auto;
 }
 
-.center-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-    flex: 1;
-    height: 100%;
-}
-
 .right-actions {
-    flex: 0 0 auto;
     margin-left: auto;
 }
 
-
 .brand-logo {
-    height: 100px;
+    height: 88px;
     width: auto;
     display: block;
     transition: transform 0.3s ease;
-    padding: 0;
 }
 
 .brand-logo:hover {
@@ -209,48 +268,51 @@ body {
 
 /* Search */
 .header-search {
-    flex: 0 1 460px;
+    flex: 0 1 480px;
     display: flex;
-    position: relative;
-    transition: all 0.3s ease;
-    margin: 0 auto;
+    align-items: stretch;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.16);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition);
 }
 
 .header-search input {
     flex: 1;
-    padding: 12px 16px;
-    border-radius: 12px 0 0 12px;
-    border: 2px solid #e6eefc;
-    border-right: none;
-    outline: none;
-    background: #fff;
+    padding: 12px 18px;
+    border: 0;
+    background: transparent;
+    color: #f8fbff;
     font-size: 0.95rem;
-    transition: all 0.2s ease;
-    height: 46px;
+}
+
+.header-search input::placeholder {
+    color: rgba(248, 251, 255, 0.72);
 }
 
 .header-search input:focus {
-    border-color: #0b72f5;
-    box-shadow: 0 0 0 4px rgba(11,114,245,0.1);
+    outline: none;
+    background: rgba(255,255,255,0.1);
 }
 
 .header-search button {
-    background: #0b72f5;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 0 12px 12px 0;
-    border: 2px solid #0b72f5;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    display: flex;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 0 24px;
+    border: none;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
 .header-search button:hover {
-    background: #0960d0;
-    border-color: #0960d0;
+    background: var(--accent-dark);
 }
 
 /* Icon actions in header */
@@ -259,14 +321,14 @@ body {
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: var(--secondary);
+    color: #f3f6ff;
     padding: 10px 18px;
-    border-radius: 14px;
+    border-radius: 999px;
     font-family: 'Protest Guerrilla', sans-serif;
     font-size: 1.05rem;
-    transition: all 0.2s ease;
+    transition: var(--transition);
     position: relative;
-    min-height: 56px;
+    min-height: 52px;
     line-height: 1;
 }
 
@@ -276,14 +338,14 @@ body {
 }
 
 .nav-action:hover {
-    background: rgba(11,114,245,0.08);
-    color: #0b72f5;
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
 }
 
 .nav-action.active {
-    background: #0b72f5;
+    background: var(--accent);
     color: #ffffff;
-    box-shadow: 0 12px 28px rgba(11,114,245,0.35);
+    box-shadow: 0 14px 28px rgba(191, 20, 21, 0.32);
 }
 
 .nav-action.active svg {
@@ -292,7 +354,7 @@ body {
 
 .nav-action.active .cart-count {
     background: #ffffff;
-    color: #0b72f5;
+    color: var(--accent);
 }
 
     .shop-toggle .chev {
@@ -300,6 +362,54 @@ body {
     }
 .nav-action:hover svg {
     transform: translateY(-2px);
+}
+
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(15, 54, 121, 0.25);
+    border: 2px solid rgba(191, 20, 21, 0.12);
+}
+
+@media (max-width: 768px) {
+    .header-top-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.75rem;
+    }
+
+    .header-social {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .header-social a {
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-inner {
+        padding: 12px 0;
+        gap: 16px;
+    }
+
+    .header-search {
+        flex: 1;
+        width: 100%;
+    }
 }
 
 /* Badge for cart items */
@@ -337,7 +447,7 @@ body {
     font-family: 'Protest Guerrilla', sans-serif;
     font-size: 1.05rem;
     cursor: pointer;
-    color: #07122e;
+    color: #f8fafc;
     transition: all 0.2s ease;
 }
 
@@ -347,8 +457,8 @@ body {
 }
 
 .shop-toggle:hover {
-    background: rgba(11,114,245,0.08);
-    color: #0b72f5;
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
 }
 
 .shop-mega {
@@ -846,7 +956,7 @@ body {
 /* Footer */
 
 .site-footer {
-    background: var(--secondary);
+    background: #0f3679;
     color: #f8fafc;
     padding: 48px 20px 32px;
     margin-top: 0;
@@ -885,7 +995,7 @@ body {
     font-size: 1.05rem;
     font-weight: 600;
     margin: 0;
-    color: #ffffff;
+    color: #bf1415;
 }
 
 .footer-list {
@@ -906,7 +1016,7 @@ body {
 .footer-links .footer-list { gap: 10px; }
 
 .footer-links a { color: #f8fafc; text-decoration: none; }
-.footer-links a:hover { text-decoration: underline; color: #90cdf4; }
+.footer-links a:hover { text-decoration: underline; color: #bf1415; }
 
 .footer-social {
     display: flex;
@@ -927,8 +1037,8 @@ body {
 }
 
 .footer-social a:hover {
-    border-color: #fef3c7;
-    color: #fef3c7;
+    border-color: #bf1415;
+    color: #bf1415;
     transform: translateY(-2px);
 }
 
