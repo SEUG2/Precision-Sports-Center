@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
 import About from "./Pages/About.jsx";
 import Shop from "./Pages/Shop.jsx";
+import CategoryPage from "./Pages/CategoryPage.jsx";
 import ProductDetails from "./Pages/ProductDetails.jsx";
 import Cart from "./Pages/Cart.jsx";
+import Checkout from "./Pages/Checkout.jsx";
 import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
 import Admin from "./Pages/Admin.jsx"; // <- add this import
@@ -21,8 +23,10 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:category" element={<Shop />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />

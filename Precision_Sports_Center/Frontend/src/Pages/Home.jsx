@@ -10,6 +10,7 @@ import basketballCard from "../img/basketball-card.webp";
 import gymCard from "../img/gym-card.webp";
 import accessoriesCard from "../img/ascessories-card.webp";
 import ProductCard from "../components/ProductCard";
+import FeaturedProductsCarousel from "../components/FeaturedProductsCarousel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -431,11 +432,22 @@ function CTASection() {
 }
 
 export default function Home() {
+  // Featured products for the auto-rotating carousel
+  const featuredProducts = [
+    ...spotlightProducts,
+    // Add more products if needed to showcase variety
+  ];
+
   return (
     <div className="page-root home-page">
       <HeroSection highlights={heroHighlights} />
       <ServiceHighlights items={serviceHighlights} />
       <CategoryTiles categories={leagueCategories} />
+      <FeaturedProductsCarousel
+        products={featuredProducts}
+        title="Featured Products"
+        subtitle="Handpicked selection of premium sports gear and equipment"
+      />
       <ProductRail
         eyebrow="2025/2026 New Kits"
         title="Latest club drops"

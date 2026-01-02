@@ -1,0 +1,194 @@
+/* Mission & Disclaimer Section Styles */
+.mission-disclaimer-section {
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+  padding: 64px 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mission-disclaimer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Mission Section */
+.mission-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.mission-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #07122e;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.mission-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #bf1415);
+  border-radius: 2px;
+}
+
+.mission-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mission-text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #374151;
+  text-align: center;
+  margin: 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mission-contact {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-align: center;
+  margin: 0;
+  margin-top: 8px;
+}
+
+.mission-contact a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mission-contact a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Disclaimer Section */
+.disclaimer-section {
+  background: #fff7ed;
+  border: 2px solid #fed7aa;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(251, 146, 60, 0.1);
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.disclaimer-icon {
+  font-size: 1.5rem;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.disclaimer-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #92400e;
+  margin: 0;
+}
+
+.disclaimer-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #78350f;
+  margin: 0;
+}
+
+.disclaimer-text strong {
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mission-disclaimer-section {
+    padding: 48px 0;
+  }
+
+  .mission-disclaimer-container {
+    gap: 32px;
+  }
+
+  .mission-section {
+    padding: 32px 24px;
+  }
+
+  .mission-title {
+    font-size: 1.75rem;
+  }
+
+  .mission-text {
+    font-size: 1rem;
+  }
+
+  .mission-contact {
+    font-size: 1rem;
+  }
+
+  .disclaimer-section {
+    padding: 24px;
+  }
+
+  .disclaimer-title {
+    font-size: 1.25rem;
+  }
+
+  .disclaimer-text {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .mission-section {
+    padding: 24px 20px;
+  }
+
+  .mission-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .mission-text {
+    font-size: 0.9375rem;
+  }
+
+  .disclaimer-section {
+    padding: 20px;
+  }
+
+  .disclaimer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .disclaimer-title {
+    font-size: 1.125rem;
+  }
+}
+

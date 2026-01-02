@@ -152,7 +152,7 @@ body {
     width: 100%;
     background: transparent;
     transition: var(--transition);
-    font-family: 'Protest Guerrilla', sans-serif;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     box-shadow: 0 16px 36px rgba(9, 26, 58, 0.15);
 }
 
@@ -324,7 +324,7 @@ body {
     color: #f3f6ff;
     padding: 10px 18px;
     border-radius: 999px;
-    font-family: 'Protest Guerrilla', sans-serif;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     font-size: 1.05rem;
     transition: var(--transition);
     position: relative;
@@ -444,7 +444,7 @@ body {
     border-radius: 14px;
     background: transparent;
     border: 0;
-    font-family: 'Protest Guerrilla', sans-serif;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     font-size: 1.05rem;
     cursor: pointer;
     color: #f8fafc;
@@ -967,35 +967,39 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
     align-items: flex-start;
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 }
 
 .footer-logo {
     width: 150px;
     height: auto;
     display: block;
+    margin-bottom: 8px;
 }
 
 .footer-about {
     color: #dbeafe;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
     max-width: 320px;
+    font-size: 0.9375rem;
 }
 
 .footer-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 0;
-    color: #bf1415;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .footer-list {
@@ -1004,19 +1008,81 @@ body {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    color: #cfd9f2;
+    gap: 10px;
 }
 
 .footer-list li {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
 }
 
-.footer-links ul,
-.footer-links .footer-list { gap: 10px; }
+.footer-list a {
+    color: #cfd9f2;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
 
-.footer-links a { color: #f8fafc; text-decoration: none; }
-.footer-links a:hover { text-decoration: underline; color: #bf1415; }
+.footer-list a:hover {
+    color: #bf1415;
+    transform: translateX(4px);
+}
+
+/* Contact Info Styles */
+.footer-contact {
+    gap: 24px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.contact-icon {
+    color: #bf1415;
+    font-size: 1.125rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-text a,
+.contact-text span {
+    color: #cfd9f2;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+}
+
+.contact-text a:hover {
+    color: #bf1415;
+}
+
+/* Social Media Section */
+.footer-social-section {
+    margin-top: 8px;
+}
+
+.social-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #dbeafe;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 
 .footer-social {
     display: flex;
@@ -1024,41 +1090,82 @@ body {
     flex-wrap: wrap;
 }
 
-.footer-social a {
-    width: 38px;
-    height: 38px;
+.footer-social .social-link {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.4);
-    display: grid;
-    place-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #f8fafc;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.footer-social a:hover {
+.footer-social .social-link:hover {
     border-color: #bf1415;
-    color: #bf1415;
-    transform: translateY(-2px);
-}
-
-.footer-policy p {
-    margin: 0;
-    color: #d1d5db;
-    line-height: 1.5;
+    color: #ffffff;
+    background: #bf1415;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(191, 20, 21, 0.4);
 }
 
 .footer-bottom {
     max-width: 1200px;
-    margin: 32px auto 0;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.12);
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-bottom-content {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     text-align: center;
     color: #cbd5f5;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
+}
+
+.footer-bottom-content small {
+    display: block;
+    line-height: 1.6;
+}
+
+/* Responsive Footer */
+@media (max-width: 968px) {
+    .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .site-footer {
+        padding: 40px 16px 24px;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-brand {
+        grid-column: 1;
+    }
+
+    .footer-about {
+        max-width: 100%;
+    }
+
+    .footer-social {
+        justify-content: flex-start;
+    }
 }
 
 /* Shop page specific helpers (imported by Shop.css, but safe here) */
@@ -1253,7 +1360,7 @@ body {
         background: transparent !important;
         border: none !important;
         cursor: pointer !important;
-        font-family: 'Protest Guerrilla', sans-serif !important;
+        font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial !important;
         font-size: 0.85rem !important;
         letter-spacing: 0.05em !important;
     }
@@ -1270,7 +1377,7 @@ body {
     .mobile-bottom-nav .nav-action span:not(.cart-count):not(.chev),
     .mobile-bottom-nav .shop-toggle span:not(.chev) {
         display: block !important;
-        font-family: 'Protest Guerrilla', sans-serif !important;
+        font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial !important;
         font-size: 0.75rem !important;
         letter-spacing: 0.06em !important;
         font-weight: 600 !important;

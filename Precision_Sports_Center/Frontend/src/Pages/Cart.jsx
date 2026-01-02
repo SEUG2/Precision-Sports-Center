@@ -147,9 +147,9 @@ export default function Cart() {
               <p className="cart-hint">Add {formatGHS(Math.max(0, 100 - subtotal))} more for free shipping.</p>
             )}
 
-            <button type="button" className="btn btn-primary checkout-btn">
+            <Link to="/checkout" className="btn btn-primary checkout-btn">
               Proceed to checkout
-            </button>
+            </Link>
             <p className="order-note">Secure checkout with SSL encryption.</p>
           </aside>
         </div>

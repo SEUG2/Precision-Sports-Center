@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Star, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw, Minus, Plus } from 'lucide-react';
 import { formatGHS } from '@/lib/formatCurrency';
+import ProductReviews from '@/components/ProductReviews';
 
 const FREE_SHIPPING_THRESHOLD = 100;
 
@@ -339,14 +340,7 @@ const ProductDetails = () => {
             </TabsContent>
             
             <TabsContent value="reviews" className="mt-6">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-center text-muted-foreground">
-                    <p>Customer reviews will be displayed here.</p>
-                    <p className="mt-2">Average rating: {product.rating} stars based on {product.reviewCount} reviews</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <ProductReviews productId={product.id} />
             </TabsContent>
           </Tabs>
         </div>

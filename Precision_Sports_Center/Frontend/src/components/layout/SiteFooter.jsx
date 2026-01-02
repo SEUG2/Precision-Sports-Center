@@ -1,121 +1,171 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF, faGoogle, faInstagram, faTiktok, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookF,
+  faInstagram,
+  faTwitter,
+  faWhatsapp,
+  faYoutube,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";
 
 export default function SiteFooter() {
-  const popularCategories = [
-    "Custom Jerseys",
-    "Cricket Custom Jerseys",
-    "Football Custom Jerseys",
-    "Basketball Custom Jerseys",
-    "Best Custom Jerseys",
-    "Cricket White Custom Jerseys",
-    "Technosport T-Shirts",
+  const quickLinks = [
+    { label: "Home", to: "/" },
+    { label: "Shop", to: "/shop" },
+    { label: "About Us", to: "/about" },
+    { label: "Contact", to: "/contact" },
+    { label: "Product Categories", to: "/shop" },
+    { label: "New Arrivals", to: "/shop" },
   ];
 
-  const infoLinks = [
-    { label: "About Us", to: "/about" },
-    { label: "Order Process", to: "/about" },
+  const customerServiceLinks = [
     { label: "Shipping Policy", to: "/contact" },
+    { label: "Return Policy", to: "/contact" },
     { label: "Exchange Policy", to: "/contact" },
-    { label: "Privacy Policy", to: "/contact" },
     { label: "Refund Policy", to: "/contact" },
+    { label: "Privacy Policy", to: "/contact" },
     { label: "Terms of Service", to: "/contact" },
-    { label: "Contact us", to: "/contact" },
+    { label: "FAQs", to: "/contact" },
+    { label: "Order Tracking", to: "/contact" },
+  ];
+
+  const contactInfo = {
+    phone: "0549807848",
+    phoneAlt: "0530518486",
+    email: "info@sportsmallgh.com",
+    address: "Accra, Ghana",
+  };
+
+  const socialLinks = [
+    {
+      icon: faWhatsapp,
+      url: "https://wa.me/233549807848",
+      label: "WhatsApp",
+    },
+    {
+      icon: faFacebookF,
+      url: "https://www.facebook.com",
+      label: "Facebook",
+    },
+    {
+      icon: faInstagram,
+      url: "https://www.instagram.com/precisionsports_gh",
+      label: "Instagram",
+    },
+    {
+      icon: faTwitter,
+      url: "https://twitter.com",
+      label: "Twitter",
+    },
+    {
+      icon: faYoutube,
+      url: "https://www.youtube.com",
+      label: "YouTube",
+    },
+    {
+      icon: faTiktok,
+      url: "https://www.tiktok.com/@precisionsports_gh",
+      label: "TikTok",
+    },
   ];
 
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
+        {/* Brand Column */}
         <div className="footer-column footer-brand">
           <img src={logo} alt="Precision Sports Center" className="footer-logo" />
-          <p className="footer-about">Precision Sports Center — gear, coaching & community.</p>
-        </div>
-
-        <div className="footer-column footer-categories">
-          <h4 className="footer-title">Popular Categories</h4>
-          <ul className="footer-list">
-            {popularCategories.map((category) => (
-              <li key={category}>{category}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="footer-column footer-follow">
-          <h4 className="footer-title">Follow Us</h4>
-          <div className="footer-social" role="navigation" aria-label="Social links">
-            <a href="mailto:xorlaliadogoh@gmail.com" aria-label="Email">
-              <FontAwesomeIcon icon={faEnvelope} />
-            </a>
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Gmail"
-            >
-              <FontAwesomeIcon icon={faGoogle} />
-            </a>
-            <a
-              href="https://www.instagram.com/precisionsports_gh"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <FontAwesomeIcon icon={faYoutube} />
-            </a>
-            <a
-              href="https://www.tiktok.com/@precisionsports_gh"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-            >
-              <FontAwesomeIcon icon={faTiktok} />
-            </a>
-          </div>
-        </div>
-
-        <div className="footer-column footer-policy">
-          <h4 className="footer-title">Exchange Policy</h4>
-          <p>
-            Exchange of a particular product is available in case of sizing issues or if the product is
-            found to be defective.
+          <p className="footer-about">
+            Precision Sports Center — Your trusted source for premium sports gear, equipment, and
+            accessories. Quality products for athletes and sports enthusiasts.
           </p>
         </div>
 
-        <div className="footer-column footer-links">
-          <h4 className="footer-title">Links</h4>
+        {/* Quick Links Column */}
+        <div className="footer-column footer-quick-links">
+          <h4 className="footer-title">Quick Links</h4>
           <ul className="footer-list">
-            {infoLinks.map((link) => (
+            {quickLinks.map((link) => (
               <li key={link.label}>
                 <Link to={link.to}>{link.label}</Link>
               </li>
             ))}
           </ul>
         </div>
+
+        {/* Customer Service Column */}
+        <div className="footer-column footer-customer-service">
+          <h4 className="footer-title">Customer Service</h4>
+          <ul className="footer-list">
+            {customerServiceLinks.map((link) => (
+              <li key={link.label}>
+                <Link to={link.to}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact Info Column */}
+        <div className="footer-column footer-contact">
+          <h4 className="footer-title">Contact Info</h4>
+          <div className="contact-details">
+            <div className="contact-item">
+              <FontAwesomeIcon icon={faPhone} className="contact-icon" />
+              <div className="contact-text">
+                <a href={`tel:+233${contactInfo.phone.replace(/\s/g, "")}`}>
+                  Tel: {contactInfo.phone}
+                </a>
+                {contactInfo.phoneAlt && (
+                  <a href={`tel:+233${contactInfo.phoneAlt.replace(/\s/g, "")}`}>
+                    {contactInfo.phoneAlt}
+                  </a>
+                )}
+              </div>
+            </div>
+            <div className="contact-item">
+              <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
+              <div className="contact-text">
+                <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+              </div>
+            </div>
+            <div className="contact-item">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="contact-icon" />
+              <div className="contact-text">
+                <span>{contactInfo.address}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Media Icons */}
+          <div className="footer-social-section">
+            <h5 className="social-title">Follow Us</h5>
+            <div className="footer-social" role="navigation" aria-label="Social media links">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="social-link"
+                >
+                  <FontAwesomeIcon icon={social.icon} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="footer-bottom">
-        <small>Copyright © 2025 Precision Sports Center. All rights reserved.</small>
-        <small>Powered by Precision Sports Center</small>
+        <div className="footer-bottom-content">
+          <small>Copyright © 2025 Precision Sports Center. All rights reserved.</small>
+          <small>Designed with precision for sports enthusiasts</small>
+        </div>
       </div>
     </footer>
   );
