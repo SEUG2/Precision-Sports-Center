@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBagShopping,
@@ -10,22 +10,40 @@ import {
   faHouse,
   faPhoneVolume,
 } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF, faInstagram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";
 import { useCart } from "../../context/CartContext";
 
 export default function SiteHeader() {
   const [search, setSearch] = useState("");
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { totalItems } = useCart();
+  const lastScrollY = useRef(0);
+  const hiddenRef = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const shouldHide = currentY > 120 && currentY > lastScrollY.current;
+      if (shouldHide !== hiddenRef.current) {
+        hiddenRef.current = shouldHide;
+        setIsHeaderHidden(shouldHide);
+      }
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    if (!search.trim()) {
-      return;
-    }
-    // Placeholder action for real search wiring
-    alert(`Search: ${search}`);
+    const trimmed = search.trim();
+    const params = new URLSearchParams();
+    if (trimmed) params.set("search", trimmed);
+    navigate(`/shop${params.size ? `?${params.toString()}` : ""}`);
   };
 
   const currentPath = location.pathname;
@@ -57,28 +75,24 @@ export default function SiteHeader() {
     },
   ];
 
+  const headerClassName = `site-header${isHeaderHidden ? " site-header--hidden" : ""}`;
+
   return (
-    <header className="site-header">
+    <header className={headerClassName}>
       <div className="header-top">
         <div className="header-top-inner">
           <div className="header-contact">
             <FontAwesomeIcon icon={faPhoneVolume} aria-hidden="true" />
-            <span>Contact 0549807848 / 0530518486</span>
+            <span>Contact 0503998502</span>
             <span className="dot" aria-hidden="true">•</span>
-            <a href="mailto:info@sportsmallgh.com">info@sportsmallgh.com</a>
+            <a href="mailto:xorlaliaddogoh@gmail.com">xorlaliaddogoh@gmail.com</a>
           </div>
           <div className="header-social" role="navigation" aria-label="Social media links">
-            <a href="https://wa.me/233549807848" target="_blank" rel="noopener noreferrer" aria-label="Whatsapp">
+            <a href="https://wa.me/233503998502" target="_blank" rel="noopener noreferrer" aria-label="Whatsapp">
               <FontAwesomeIcon icon={faWhatsapp} />
-            </a>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <FontAwesomeIcon icon={faFacebookF} />
             </a>
             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <FontAwesomeIcon icon={faTwitter} />
             </a>
           </div>
         </div>

@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import {
-  faFacebookF,
   faInstagram,
-  faTwitter,
   faWhatsapp,
-  faYoutube,
   faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";
@@ -25,18 +22,15 @@ export default function SiteFooter() {
   const customerServiceLinks = [
     { label: "Shipping Policy", to: "/contact" },
     { label: "Return Policy", to: "/contact" },
-    { label: "Exchange Policy", to: "/contact" },
     { label: "Refund Policy", to: "/contact" },
-    { label: "Privacy Policy", to: "/contact" },
     { label: "Terms of Service", to: "/contact" },
-    { label: "FAQs", to: "/contact" },
     { label: "Order Tracking", to: "/contact" },
   ];
 
   const contactInfo = {
-    phone: "0549807848",
-    phoneAlt: "0530518486",
-    email: "info@sportsmallgh.com",
+    phone: "0503998502",
+    phoneAlt: null,
+    email: "xorlaliaddogoh@gmail.com",
     address: "Accra, Ghana",
   };
 
@@ -47,24 +41,9 @@ export default function SiteFooter() {
       label: "WhatsApp",
     },
     {
-      icon: faFacebookF,
-      url: "https://www.facebook.com",
-      label: "Facebook",
-    },
-    {
       icon: faInstagram,
       url: "https://www.instagram.com/precisionsports_gh",
       label: "Instagram",
-    },
-    {
-      icon: faTwitter,
-      url: "https://twitter.com",
-      label: "Twitter",
-    },
-    {
-      icon: faYoutube,
-      url: "https://www.youtube.com",
-      label: "YouTube",
     },
     {
       icon: faTiktok,
@@ -72,6 +51,10 @@ export default function SiteFooter() {
       label: "TikTok",
     },
   ];
+
+  const handleFooterNav = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="site-footer">
@@ -91,7 +74,9 @@ export default function SiteFooter() {
           <ul className="footer-list">
             {quickLinks.map((link) => (
               <li key={link.label}>
-                <Link to={link.to}>{link.label}</Link>
+                <Link to={link.to} onClick={handleFooterNav}>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -103,7 +88,9 @@ export default function SiteFooter() {
           <ul className="footer-list">
             {customerServiceLinks.map((link) => (
               <li key={link.label}>
-                <Link to={link.to}>{link.label}</Link>
+                <Link to={link.to} onClick={handleFooterNav}>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>

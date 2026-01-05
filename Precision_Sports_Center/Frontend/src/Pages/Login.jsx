@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle, faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import "./Login.css";
 
 export default function Login() {
@@ -106,10 +106,6 @@ export default function Login() {
                 <button type="button" className="social-btn">
                   <FontAwesomeIcon icon={faGoogle} />
                   Google
-                </button>
-                <button type="button" className="social-btn">
-                  <FontAwesomeIcon icon={faFacebookF} />
-                  Facebook
                 </button>
               </div>
 

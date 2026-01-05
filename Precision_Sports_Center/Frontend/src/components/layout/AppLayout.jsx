@@ -4,6 +4,7 @@ import SiteHeader from "./SiteHeader";
 import MissionDisclaimer from "./MissionDisclaimer";
 import SiteFooter from "./SiteFooter";
 import MobileBottomNav from "./MobileBottomNav";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function AppLayout() {
   return (
@@ -15,6 +16,7 @@ export default function AppLayout() {
       <MissionDisclaimer />
       <SiteFooter />
       <MobileBottomNav />
+      <Toaster />
     </div>
   );
 }

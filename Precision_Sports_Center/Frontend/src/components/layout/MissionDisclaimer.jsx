@@ -18,7 +18,7 @@ export default function MissionDisclaimer() {
               Ghana and beyond with rapid delivery system.
             </p>
             <p className="mission-contact">
-              Call/WhatsApp us <a href="tel:+233549807848">0549807848</a> now.
+              Call/WhatsApp us <a href="tel:+233503998502">0503998502</a> now.
             </p>
           </div>
         </div>
@@ -40,4 +40,5 @@ export default function MissionDisclaimer() {
     </section>
   );
 }
+
 
