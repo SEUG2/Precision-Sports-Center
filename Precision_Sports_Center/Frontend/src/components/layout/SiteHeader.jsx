@@ -5,14 +5,17 @@ import {
   faBagShopping,
   faCircleInfo,
   faArrowRightToBracket,
+  faArrowRightFromBracket,
   faCartShopping,
   faMagnifyingGlass,
   faHouse,
   faPhoneVolume,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function SiteHeader() {
   const [search, setSearch] = useState("");
@@ -20,6 +23,7 @@ export default function SiteHeader() {
   const location = useLocation();
   const navigate = useNavigate();
   const { totalItems } = useCart();
+  const { user, signOut } = useAuth();
   const lastScrollY = useRef(0);
   const hiddenRef = useRef(false);
 
@@ -46,6 +50,11 @@ export default function SiteHeader() {
     navigate(`/shop${params.size ? `?${params.toString()}` : ""}`);
   };
 
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
+
   const currentPath = location.pathname;
 
   const navItems = [
@@ -66,12 +75,6 @@ export default function SiteHeader() {
       to: "/about",
       icon: faCircleInfo,
       isActive: currentPath.startsWith("/about"),
-    },
-    {
-      label: "Login",
-      to: "/login",
-      icon: faArrowRightToBracket,
-      isActive: currentPath.startsWith("/login"),
     },
   ];
 
@@ -131,6 +134,26 @@ export default function SiteHeader() {
               <span className="action-label">{label}</span>
             </Link>
           ))}
+
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="nav-action"
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+            >
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              <span className="action-label">Logout</span>
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className={`nav-action ${currentPath.startsWith("/login") ? "active" : ""}`.trim()}
+              aria-current={currentPath.startsWith("/login") ? "page" : undefined}
+            >
+              <FontAwesomeIcon icon={faArrowRightToBracket} />
+              <span className="action-label">Login</span>
+            </Link>
+          )}
 
           <Link
             to="/cart"
