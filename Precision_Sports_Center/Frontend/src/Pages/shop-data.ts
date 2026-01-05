@@ -839,14 +839,10 @@ const equipmentProducts: Product[] = [
   }
 ];
 
-export const products: Product[] = [
-  ...jerseyProducts,
-  ...bootProducts,
-  ...equipmentProducts
-];
+export const products: Product[] = [];
 
-export const distinctLeagues = Array.from(new Set(products.map((product) => product.league))).sort();
-export const distinctTeams = Array.from(new Set(products.map((product) => product.team))).sort();
-export const distinctCategories = Array.from(new Set(products.map((product) => product.category))).sort() as ProductCategory[];
+export const distinctLeagues: string[] = [];
+export const distinctTeams: string[] = [];
+export const distinctCategories: ProductCategory[] = [];
 
 export const jerseySizes: string[] = ["S", "M", "L", "XL", "XXL"];
