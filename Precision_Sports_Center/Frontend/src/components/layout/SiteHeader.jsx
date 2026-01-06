@@ -10,7 +10,6 @@ import {
   faMagnifyingGlass,
   faHouse,
   faPhoneVolume,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import logo from "../../img/logo.png";

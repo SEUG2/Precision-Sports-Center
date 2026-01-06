@@ -483,7 +483,7 @@ const ShopPage: React.FC = () => {
   const { toast } = useToast();
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState<FilterState>(() => parseFiltersFromParams(searchParams));
-  const [catalog, setCatalog] = useState<Product[]>(fallbackProducts);
+  const [catalog, setCatalog] = useState<Product[]>([]);
   const [isCatalogFetching, setIsCatalogFetching] = useState(true);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [wishlist, toggleWishlist] = usePersistentSet(
@@ -568,19 +568,16 @@ const ShopPage: React.FC = () => {
               sizes: product.sizes.length ? product.sizes : jerseySizes,
             }));
 
-          if (normalized.length && isActive) {
+          if (isActive) {
             setCatalog(normalized);
-            setCatalogError(null);
-          }
-
-          if (!normalized.length && isActive) {
-            setCatalogError("No live products found. Showing cached catalog instead.");
+            setCatalogError(normalized.length ? null : "No products found in the store.");
           }
         }
       } catch (error) {
         console.error("Failed to load products from Supabase", error);
         if (isActive) {
-          setCatalogError("Unable to load live inventory. Showing cached catalog instead.");
+          setCatalog([]);
+          setCatalogError("Unable to load inventory. Please try again later.");
         }
       } finally {
         if (isActive) {

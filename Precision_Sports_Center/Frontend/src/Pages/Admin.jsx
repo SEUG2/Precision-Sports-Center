@@ -230,7 +230,7 @@ export default function Admin() {
       setProducts((prev) => prev.filter((p) => p.id !== id));
       setSuccess("Product deleted successfully!");
       setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
+    } catch (_err) {
       setError("Failed to delete product");
     }
   };

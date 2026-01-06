@@ -58,10 +58,10 @@ export default function Contact() {
 
         <div className="contact-grid">
           <div className="contact-info-panel">
-            {infoBlocks.map(({ icon: Icon, title, body, link }) => (
+            {infoBlocks.map(({ icon: IconComponent, title, body, link }) => (
               <article className="info-card" key={title}>
                 <span className="info-icon" aria-hidden="true">
-                  <Icon size={20} />
+                  <IconComponent size={20} />
                 </span>
                 <div>
                   <h3>{title}</h3>

@@ -10,7 +10,6 @@ import "./CategoryPage.css";
 import pfBoot from "../img/ProFootballBoot1.webp";
 import jerseyImg from "../img/TrainingJersey.jpeg";
 import glovesImg from "../img/GoalkeeperGloves.jpeg";
-import footballCard from "../img/footbll-card.webp";
 import basketballCard from "../img/basketball-card.webp";
 import accessoriesCard from "../img/ascessories-card.webp";
 import gymCard from "../img/gym-card.webp";
@@ -142,9 +141,6 @@ const categoryMap = {
 export default function CategoryPage() {
   const { categoryName } = useParams();
   const { addItem, items: cartItems } = useCart();
-
-  // Normalize category name from URL (e.g., "boots" -> "Boots")
-  const normalizedCategory = categoryName?.toLowerCase().replace(/-/g, " ");
 
   // Get category info from map or use the category name directly
   const categoryInfo = useMemo(() => {

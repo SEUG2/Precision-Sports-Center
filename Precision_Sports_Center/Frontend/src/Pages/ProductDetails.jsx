@@ -14,7 +14,7 @@ import ProductReviews from '@/components/ProductReviews';
 const FREE_SHIPPING_THRESHOLD = 100;
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { id: _id } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('');
