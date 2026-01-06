@@ -10,7 +10,6 @@ import basketballCard from "../img/basketball-card.webp";
 import gymCard from "../img/gym-card.webp";
 import accessoriesCard from "../img/ascessories-card.webp";
 import ProductCard from "../components/ProductCard";
-import FeaturedProductsCarousel from "../components/FeaturedProductsCarousel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -51,7 +50,7 @@ const leagueCategories = [
     title: "Premier League Kits",
     description: "Home, away and third drops for the 2025/26 season.",
     to: "/shop/premier-league",
-    image: footballCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/premier%20league.jpg",
     accent: "rgba(15, 54, 121, 0.92)",
     accentSoft: "rgba(15, 54, 121, 0.65)",
   },
@@ -61,7 +60,7 @@ const leagueCategories = [
     title: "La Liga Kits",
     description: "Barcelona, Madrid, Atlético and the entire Spanish elite.",
     to: "/shop/la-liga",
-    image: basketballCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/la%20liga.jfif",
     accent: "rgba(191, 20, 21, 0.9)",
     accentSoft: "rgba(191, 20, 21, 0.65)",
   },
@@ -71,7 +70,7 @@ const leagueCategories = [
     title: "Bundesliga Kits",
     description: "Bayern, Dortmund, Leipzig and more German powerhouses.",
     to: "/shop/bundesliga",
-    image: gymCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/bundesliga.jpg",
     accent: "rgba(9, 26, 58, 0.92)",
     accentSoft: "rgba(9, 26, 58, 0.6)",
   },
@@ -81,7 +80,7 @@ const leagueCategories = [
     title: "AFCON & National Teams",
     description: "Black Stars, Nigeria, Ivory Coast and continental pride.",
     to: "/shop/afcon",
-    image: accessoriesCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/afcon.jfif",
     accent: "rgba(191, 20, 21, 0.9)",
     accentSoft: "rgba(191, 20, 21, 0.5)",
   },
@@ -91,7 +90,7 @@ const leagueCategories = [
     title: "Retro Jerseys",
     description: "Iconic throwbacks from club and national archives.",
     to: "/shop/retro",
-    image: footballCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/retro%20jerseys.webp",
     accent: "rgba(15, 54, 121, 0.85)",
     accentSoft: "rgba(15, 54, 121, 0.45)",
   },
@@ -101,7 +100,7 @@ const leagueCategories = [
     title: "Boots & Training Gear",
     description: "Match-day boots, keeper gloves and training essentials.",
     to: "/shop/equipment",
-    image: gymCard,
+    image: "https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/Equipment.jpg",
     accent: "rgba(9, 26, 58, 0.9)",
     accentSoft: "rgba(9, 26, 58, 0.55)",
   },
@@ -243,7 +242,7 @@ function HeroSection({ highlights }) {
         <div className="home-hero-visual">
           <div className="hero-visual-card">
             <span className="hero-card-tag">2025/2026 drop</span>
-            <img src={jerseyImg} alt="2025/2026 jerseys" className="primary" loading="lazy" />
+            <img src="https://qdmbqvtxogisuwwgcule.supabase.co/storage/v1/object/public/product-images/drop.jfif" alt="2025/2026 jerseys" className="primary" loading="lazy" />
             <img src={bootsImg} alt="" aria-hidden="true" className="secondary" loading="lazy" />
           </div>
         </div>
@@ -432,27 +431,16 @@ function CTASection() {
 }
 
 export default function Home() {
-  // Featured products for the auto-rotating carousel
-  const featuredProducts = [
-    ...spotlightProducts,
-    // Add more products if needed to showcase variety
-  ];
-
   return (
     <div className="page-root home-page">
       <HeroSection highlights={heroHighlights} />
       <ServiceHighlights items={serviceHighlights} />
       <CategoryTiles categories={leagueCategories} />
-      <FeaturedProductsCarousel
-        products={featuredProducts}
-        title="Featured Products"
-        subtitle="Handpicked selection of premium sports gear and equipment"
-      />
       <ProductRail
         eyebrow="2025/2026 New Kits"
         title="Latest club drops"
         description="Fresh player and fan editions arriving weekly with sizes for every supporter."
-        products={spotlightProducts}
+        products={[]}
       />
       <PromoStories stories={promoStories} />
       <TestimonialsSection quotes={testimonials} />
